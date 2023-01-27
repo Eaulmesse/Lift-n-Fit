@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block body %}
+{% include "navbar.html.twig" %}
+
+<div class="container-fluid p-0">
+    <div class="row g-0 overflow-hidden">
+        <div class="col position-relative h-90">
+            <div class="d-flex justify-content-center">
+                <a href="" class="position-absolute bungee link-light fs-1 pt-5">Conseil</a>
+            </div>
+            <a class="hover-black" href=""> <img src={{ asset('media/workout-conseil.jpg') }} class="img-fluid" alt="..."></a>
+        </div>
+        <div class="col position-relative h-90">
+            <div class="d-flex justify-content-center">
+                <a href="" class="position-absolute bungee link-light fs-1 pt-5">Forum</a>
+            </div>
+
+            <div class="hover-black">
+                <a class="" href=""> <img src={{ asset('media/workout-coach.jpg') }} class="img-fluid" alt="..."></a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

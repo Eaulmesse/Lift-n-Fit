@@ -1,3 +1,57 @@
-body {
-    background-color: lightgray;
+@import "var.scss";
+@import "~bootstrap/scss/bootstrap";
+@import url('https://fonts.googleapis.com/css2?family=Bungee+Inline&family=Lato:wght@700&display=swap');
+
+// POLICE
+
+.bungee {
+    font-family: 'Bungee Inline', cursive;
+}
+
+.lato {
+    font-family: 'Lato', sans-serif;
+}
+
+// FONT COLOR
+
+.green-font {
+    color: #042201;
+}
+
+.white-font {
+    color: #FFF;
+}
+
+// BG COLOR 
+
+.green-bg {
+    background-color: #042201;
+}
+
+.white-bg {
+    background-color: #fff;
+}
+
+// LINK AND HOVER
+
+.link-green {
+    color: #042201;
+}
+
+.link-green:hover {
+    color: #1abc0b;  
+}
+
+
+.link-white {
+    color: #FFF;
+}
+
+.link-white:hover {
+    color: #bebcbc;
+}
+
+.hover-black:hover {
+    background-color: #1111;
+    opacity: 0.9;
 }

@@ -19,12 +19,19 @@
     </button>
     <div id="navbarNav">
         <ul class="navbar-nav">
+
+        {% if is_granted('ROLE_USER') %}
+            <li class="nav-item">
+                <a class="nav-link lato link-success fs-5" href="{{ path('app_logout') }}">Logout</a> 
+            </li>
+        {% else %}
             <li class="nav-item">
             <a class="nav-link lato link-success fs-5" href="{{ path('app_login') }}">Connexion</a>
             </li>
             <li class="nav-item">
             <a class="nav-link lato link-success fs-5" href="{{ path('app_register') }}">Créer son compte</a>
             </li>
+        {% endif %}
         </ul>
     </div>
 </nav>

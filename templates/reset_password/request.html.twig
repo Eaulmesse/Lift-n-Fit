@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reset your password{% endblock %}
+
+{% block body %}
+{% include "navbar.html.twig" %}
+
+<div class="container d-flex justify-content-between pt-5">
+
+    <div class="mr-5 lato text-success fs-4">
+        {% for flash_error in app.flashes('reset_password_error') %}
+            <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+        {% endfor %}
+
+        <h1>Mot de passe oublié ? </h1>
+
+        {{ form_start(requestForm)}}
+            
+            <div>
+                <small>
+                    Entrez votre mail
+                </small>
+            </div>
+            {{ form_row(requestForm.email) }}
+            <button class="btn btn-outline-success mt-5 float-end">Envoyer</button>
+        {{ form_end(requestForm) }}
+    </div>
+
+    <div>
+        <img src={{ asset('media/workout-login.jpg') }} class="img-fluid" alt="...">
+    </div>
+</div>
+{% endblock %}

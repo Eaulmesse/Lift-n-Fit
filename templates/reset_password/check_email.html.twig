@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Email de réinitialisation envoyé{% endblock %}
+
+{% block body %}
+{% include "navbar.html.twig" %}
+
+{# <div class="d-flex flex-column align-items-center fs-3 mt-5 lato">
+    <p>
+        Si un compte est lié à cet email, un courriel a été envoyé, ouvrez le et cliquez sur le lien pour réinitialiser votre mot de passe.
+    </p>
+    <p>Si vous n'avez pas reçu de mail, verifiez vos spam ou <a class="text-success" href="{{ path('app_forgot_password_request') }}">essayez à nouveau</a>.</p>
+</div> #}
+
+<div class="container d-flex justify-content-between pt-5 fs-5">
+
+    <div class="mr-5 lato text-success">
+        <p>
+            Si un compte est lié à cet email, un courriel a été envoyé, ouvrez le et cliquez sur le lien pour réinitialiser votre mot de passe.
+        </p>
+        <p>Si vous n'avez pas reçu de mail, verifiez vos spam ou <a class="text-success" href="{{ path('app_forgot_password_request') }}">essayez à nouveau</a>.</p>
+    </div>
+
+    <div>
+        <img src={{ asset('media/workout-login.jpg') }} class="img-fluid" alt="...">
+    </div>
+</div>
+
+
+{% endblock %}

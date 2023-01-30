@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reset your password{% endblock %}
+
+{% block body %}
+{% include 'navbar.html.twig' %}
+
+<div class="container d-flex justify-content-between pt-5">
+
+
+    <div class="mr-5 lato text-success fs-4">
+        <h1>Réinitaliser votre mot de passe</h1>
+
+        {{ form_start(resetForm) }}
+            {{ form_row(resetForm.plainPassword) }}
+            <button class="btn btn-outline-success mt-5 float-end">Réinitaliser</button>
+        {{ form_end(resetForm) }}
+    </div>
+
+    <div>
+        <img src={{ asset('media/workout-login.jpg') }} class="img-fluid" alt="...">
+    </div>
+
+</div>
+{% endblock %}

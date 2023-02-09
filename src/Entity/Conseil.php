@@ -3,8 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\ConseilRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -22,16 +20,8 @@ class Conseil
     #[ORM\Column(type: Types::TEXT)]
     private ?string $content = null;
 
-    #[ORM\ManyToOne(inversedBy: 'conseil_id')]
-    private ?Coach $coach_id = null;
-
-    #[ORM\ManyToMany(targetEntity: ConseilCategory::class, inversedBy: 'conseils')]
-    private Collection $conseilcategory_id;
-
-    public function __construct()
-    {
-        $this->conseilcategory_id = new ArrayCollection();
-    }
+    #[ORM\ManyToOne(inversedBy: 'Conseil')]
+    private ?User $user = null;
 
     public function getId(): ?int
     {
@@ -62,38 +52,14 @@ class Conseil
         return $this;
     }
 
-    public function getCoachId(): ?Coach
+    public function getUser(): ?User
     {
-        return $this->coach_id;
+        return $this->user;
     }
 
-    public function setCoachId(?Coach $coach_id): self
+    public function setUser(?User $user): self
     {
-        $this->coach_id = $coach_id;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, ConseilCategory>
-     */
-    public function getConseilcategoryId(): Collection
-    {
-        return $this->conseilcategory_id;
-    }
-
-    public function addConseilcategoryId(ConseilCategory $conseilcategoryId): self
-    {
-        if (!$this->conseilcategory_id->contains($conseilcategoryId)) {
-            $this->conseilcategory_id->add($conseilcategoryId);
-        }
-
-        return $this;
-    }
-
-    public function removeConseilcategoryId(ConseilCategory $conseilcategoryId): self
-    {
-        $this->conseilcategory_id->removeElement($conseilcategoryId);
+        $this->user = $user;
 
         return $this;
     }

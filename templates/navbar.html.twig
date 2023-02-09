@@ -55,12 +55,14 @@
     </div>
 
     <div id="navbarNav">
+    {% if is_granted('ROLE_USER') %}
         <ul class="navbar-nav">
             
             <li class="nav-item">
-            <a class="nav-link lato link-light fs-5" href="#">Mon Compte</a>
+            <a class="nav-link lato link-light fs-5" href="{{ path('app_user_account') }}"> Mon Compte </a>
             </li>
         </ul>
+    {% endif %}
     </div>
 </nav>
 

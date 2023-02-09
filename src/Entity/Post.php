@@ -22,19 +22,15 @@ class Post
     #[ORM\Column(type: Types::TEXT)]
     private ?string $content = null;
 
-    #[ORM\ManyToOne(inversedBy: 'posts')]
-    private ?User $user_id = null;
+    #[ORM\ManyToOne(inversedBy: 'Post')]
+    private ?User $user = null;
 
     #[ORM\OneToMany(mappedBy: 'post', targetEntity: Response::class)]
-    private Collection $response_id;
-
-    #[ORM\ManyToMany(targetEntity: Category::class, inversedBy: 'posts')]
-    private Collection $category_id;
+    private Collection $Response;
 
     public function __construct()
     {
-        $this->response_id = new ArrayCollection();
-        $this->category_id = new ArrayCollection();
+        $this->Response = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -66,14 +62,14 @@ class Post
         return $this;
     }
 
-    public function getUserId(): ?User
+    public function getUser(): ?User
     {
-        return $this->user_id;
+        return $this->user;
     }
 
-    public function setUserId(?User $user_id): self
+    public function setUser(?User $user): self
     {
-        $this->user_id = $user_id;
+        $this->user = $user;
 
         return $this;
     }
@@ -81,53 +77,29 @@ class Post
     /**
      * @return Collection<int, Response>
      */
-    public function getResponseId(): Collection
+    public function getResponse(): Collection
     {
-        return $this->response_id;
+        return $this->Response;
     }
 
-    public function addResponseId(Response $responseId): self
+    public function addResponse(Response $response): self
     {
-        if (!$this->response_id->contains($responseId)) {
-            $this->response_id->add($responseId);
-            $responseId->setPost($this);
+        if (!$this->Response->contains($response)) {
+            $this->Response->add($response);
+            $response->setPost($this);
         }
 
         return $this;
     }
 
-    public function removeResponseId(Response $responseId): self
+    public function removeResponse(Response $response): self
     {
-        if ($this->response_id->removeElement($responseId)) {
+        if ($this->Response->removeElement($response)) {
             // set the owning side to null (unless already changed)
-            if ($responseId->getPost() === $this) {
-                $responseId->setPost(null);
+            if ($response->getPost() === $this) {
+                $response->setPost(null);
             }
         }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Category>
-     */
-    public function getCategoryId(): Collection
-    {
-        return $this->category_id;
-    }
-
-    public function addCategoryId(Category $categoryId): self
-    {
-        if (!$this->category_id->contains($categoryId)) {
-            $this->category_id->add($categoryId);
-        }
-
-        return $this;
-    }
-
-    public function removeCategoryId(Category $categoryId): self
-    {
-        $this->category_id->removeElement($categoryId);
 
         return $this;
     }

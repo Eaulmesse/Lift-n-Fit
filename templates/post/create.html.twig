@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon compte{% endblock %}
+
+
+{% block body %}
+{% include('navbar.html.twig') %}
+
+<div class="container d-flex justify-content-between pt-5">
+    <div class="lato text-success">
+        <div>
+            {{ form_start(PostForm) }}
+            {{form_row(PostForm.name)}}
+            {{form_row(PostForm.content)}}
+
+            <div>
+                <button type="submit" class="btn btn-outline-success">Valider</button>
+            </div>
+
+            {{ form_end(PostForm) }}
+        </div>
+    </div>
+
+    
+
+    <div>
+        <img src={{ asset('media/workout-login.jpg') }} class="img-fluid" alt="...">
+    </div>
+</div>
+{% endblock %}

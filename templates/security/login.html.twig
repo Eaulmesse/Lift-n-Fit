@@ -29,11 +29,15 @@
             value="{{ csrf_token('authenticate') }}"
         >
 
-        
+        <div>
+            <button class="btn btn-outline-success mt-5" type="submit">Connexion</button>
+        </div>
 
-        <button class="btn btn-outline-success mt-5 float-end" type="submit">
-            Connexion
-        </button>
+        <div>
+            <a href={{ path('app_register') }} class="btn btn-outline-success mt-5" type="submit">Pas encore de compte ?</a>
+            <a href={{ path('app_forgot_password_request') }} class="btn btn-outline-success mt-5" type="submit">Mot de passe oublié</a>
+        </div>
+        
     </form>
 
     <div>

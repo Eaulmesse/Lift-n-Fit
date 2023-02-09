@@ -19,9 +19,17 @@
             {{ form_row(registrationForm.plainPassword, {
                 label: 'Password'
             }) }}
+            {{ form_row(registrationForm.coach) }}
             {{ form_row(registrationForm.agreeTerms) }}
 
-            <button type="submit" class="btn btn-outline-success float-end">Register</button>
+            <div>
+                <button type="submit" class="btn btn-outline-success">Créer un compte</button>
+            </div>
+
+            <div>
+                <a href={{ path('app_login') }} type="submit" class="btn btn-outline-success mt-2">Déjà un compte ?</a>
+            </div>
+             
         {{ form_end(registrationForm) }}
     </div>
 

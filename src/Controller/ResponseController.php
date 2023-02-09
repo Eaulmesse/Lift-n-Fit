@@ -6,13 +6,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class PostCategoryController extends AbstractController
+class ResponseController extends AbstractController
 {
-    #[Route('/post/category', name: 'app_post_category')]
+    #[Route('/response', name: 'app_response')]
     public function index(): Response
     {
-        return $this->render('post_category/index.html.twig', [
-            'controller_name' => 'PostCategoryController',
+        return $this->render('response/index.html.twig', [
+            'controller_name' => 'ResponseController',
         ]);
     }
 }

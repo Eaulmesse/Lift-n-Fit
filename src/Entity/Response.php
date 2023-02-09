@@ -17,7 +17,7 @@ class Response
     #[ORM\Column(type: Types::TEXT)]
     private ?string $content = null;
 
-    #[ORM\ManyToOne(inversedBy: 'response_id')]
+    #[ORM\ManyToOne(inversedBy: 'Response')]
     private ?Post $post = null;
 
     public function getId(): ?int

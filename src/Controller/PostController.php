@@ -10,6 +10,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Security\Core\Authentication\AuthenticationManagerInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use App\Repository\PostRepository;
 
 class PostController extends AbstractController
 {
@@ -22,28 +26,26 @@ class PostController extends AbstractController
     }
 
     #[Route('/post/create', name: 'app_post_create')]
-    public function create(Request $request, EntityManagerInterface $entityManager, User $user): Response
+    public function create(Request $request, EntityManagerInterface $entityManager): Response
     {
         $user = $this->getUser();
-        $user->getId();
         $post = new Post();
-
-        $form = $this->createFormBuilder()
-        ->add('user_id', HiddenType::class, [
-            'data' => $user,
-        ])
+  
+        $form = $this->createFormBuilder($post)
         ->add('name', TextType::class)
         ->add('content', TextType::class)
         ->getForm();
 
-
-
         $form->handleRequest($request);
+        
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // return $this->redirectToRoute('app_post');
+            dump($form);
+            $post->setUser($user);
+            
             $entityManager->persist($post);
-            $entityManager->flush();
+            $entityManager->flush();          
+            return $this->redirectToRoute('app_post');
         }
 
         

@@ -28,6 +28,9 @@ class Post
     #[ORM\OneToMany(mappedBy: 'post', targetEntity: Response::class)]
     private Collection $Response;
 
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $date = null;
+
     public function __construct()
     {
         $this->Response = new ArrayCollection();
@@ -100,6 +103,23 @@ class Post
                 $response->setPost(null);
             }
         }
+
+        return $this;
+    }
+
+
+
+
+
+
+    public function getDate(): ?\DateTimeInterface
+    {
+        return $this->date;
+    }
+
+    public function setDate(\DateTimeInterface $date): self
+    {
+        $this->date = $date;
 
         return $this;
     }

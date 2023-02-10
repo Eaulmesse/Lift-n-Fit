@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Mon compte{% endblock %}
+{% block title %}Création de post{% endblock %}
 
 
 {% block body %}
@@ -11,6 +11,7 @@
         <div>
             {{ form_start(PostForm) }}
             {{form_row(PostForm.name)}}
+
             {{form_row(PostForm.content)}}
 
             <div>

@@ -43,6 +43,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Conseil::class)]
     private Collection $Conseil;
 
+    #[ORM\Column(length: 255)]
+    private ?string $pseudonyme = null;
+
     public function __construct()
     {
         $this->Post = new ArrayCollection();
@@ -199,6 +202,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $conseil->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getPseudonyme(): ?string
+    {
+        return $this->pseudonyme;
+    }
+
+    public function setPseudonyme(string $pseudonyme): self
+    {
+        $this->pseudonyme = $pseudonyme;
 
         return $this;
     }

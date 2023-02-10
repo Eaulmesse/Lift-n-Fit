@@ -60,7 +60,6 @@ class UserController extends AbstractController
             'coachForm' => $form->createView(),
             'controller_name' => 'UserController',
             'user' => $user,
-            dump($form -> getData()),
         ]);
     }
 

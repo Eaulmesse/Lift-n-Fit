@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon compte{% endblock %}
+
+
+{% block body %}
+{% include('navbar.html.twig') %}
+
+<div class="container d-flex justify-content-between pt-5">
+    
+    <div>
+        <div class="lato text-success h1">
+            {{ post.name }}
+        </div>
+        <div class="lato text-success mt-5">
+            {{ post.content }}
+        </div>
+
+        <div class="lato text-success fs-5 mt-5">
+            {{ post.user.pseudonyme}}
+        </div>
+        <div class="lato text-success fs-6">
+            {{ post.date|date("m/d/Y") }}
+        </div>
+    </div>
+
+    
+
+</div>
+{% endblock %}

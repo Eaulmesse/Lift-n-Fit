@@ -13,39 +13,53 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\Authentication\AuthenticationManagerInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use App\Repository\PostRepository;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 
 class PostController extends AbstractController
 {
-    #[Route('/post', name: 'app_post')]
-    public function index(): Response
+
+    #[Route('/post/all', name: 'app_post_all')]
+    public function postAll(string $id, PostRepository $postRepository): Response
     {
-        return $this->render('post/index.html.twig', [
+        $post = $postRepository -> findall();
+        
+        return $this->render('post/postall.html.twig', [
             'controller_name' => 'PostController',
+            'post' => $post,
         ]);
     }
-
+    
     #[Route('/post/create', name: 'app_post_create')]
     public function create(Request $request, EntityManagerInterface $entityManager): Response
     {
         $user = $this->getUser();
         $post = new Post();
+        $date = new \DateTime();
   
         $form = $this->createFormBuilder($post)
         ->add('name', TextType::class)
-        ->add('content', TextType::class)
+        ->add('content', TextareaType::class,
+        [
+        'attr' => ['cols' => '50', 'rows' => '10'],
+        ])
         ->getForm();
 
         $form->handleRequest($request);
         
 
         if ($form->isSubmitted() && $form->isValid()) {
-            dump($form);
             $post->setUser($user);
+            $post->setDate($date);
+
             
             $entityManager->persist($post);
             $entityManager->flush();          
-            return $this->redirectToRoute('app_post');
+
+            $postid = $post->getId();
+
+            return $this->redirectToRoute('app_post_id', ['id' => $postid]);
         }
 
         
@@ -54,5 +68,18 @@ class PostController extends AbstractController
         ]);
         
     }
+
+    #[Route('/post/{id}', name: 'app_post_id')]
+    public function post(string $id, PostRepository $postRepository): Response
+    {
+        $post = $postRepository -> find($id);
+
+        return $this->render('post/post.html.twig', [
+            'controller_name' => 'PostController',
+            'post' => $post,
+        ]);
+    }
+
+    
     
 }

@@ -21,51 +21,64 @@ class PostController extends AbstractController
 {
 
     #[Route('/post/all', name: 'app_post_all')]
-    public function postAll(string $id, PostRepository $postRepository): Response
+    public function postAll(PostRepository $postRepository): Response
     {
         $post = $postRepository -> findall();
         
         return $this->render('post/postall.html.twig', [
             'controller_name' => 'PostController',
-            'post' => $post,
+            'posts' => $post,
         ]);
     }
     
     #[Route('/post/create', name: 'app_post_create')]
     public function create(Request $request, EntityManagerInterface $entityManager): Response
-    {
-        $user = $this->getUser();
-        $post = new Post();
-        $date = new \DateTime();
-  
-        $form = $this->createFormBuilder($post)
-        ->add('name', TextType::class)
-        ->add('content', TextareaType::class,
-        [
-        'attr' => ['cols' => '50', 'rows' => '10'],
-        ])
-        ->getForm();
+    {   
 
-        $form->handleRequest($request);
         
+        if ($this->getUser()) {
+            
+            $user = $this->getUser();
+            $post = new Post();
+            $date = new \DateTime();
+    
+            $form = $this->createFormBuilder($post)
+            ->add('name', TextType::class)
+            ->add('content', TextareaType::class,
+            [
+            'attr' => ['cols' => '50', 'rows' => '10'],
+            ])
+            ->getForm();
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $post->setUser($user);
-            $post->setDate($date);
+            $form->handleRequest($request);
+            
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                $post->setUser($user);
+                $post->setDate($date);
+
+                
+                $entityManager->persist($post);
+                $entityManager->flush();          
+
+                $postid = $post->getId();
+
+                return $this->redirectToRoute('app_post_id', ['id' => $postid]);
+            }
 
             
-            $entityManager->persist($post);
-            $entityManager->flush();          
+            return $this->render('post/create.html.twig', [
+                'PostForm' => $form->createView(),
+            ]);
 
-            $postid = $post->getId();
-
-            return $this->redirectToRoute('app_post_id', ['id' => $postid]);
+        } else {
+            return $this->redirectToRoute('app_login');
         }
 
+
+
         
-        return $this->render('post/create.html.twig', [
-            'PostForm' => $form->createView(),
-        ]);
+        
         
     }
 

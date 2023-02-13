@@ -25,15 +25,16 @@ class Post
     #[ORM\ManyToOne(inversedBy: 'Post')]
     private ?User $user = null;
 
-    #[ORM\OneToMany(mappedBy: 'post', targetEntity: Response::class)]
-    private Collection $Response;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $date = null;
 
+    #[ORM\OneToMany(mappedBy: 'post_id', targetEntity: PostReponse::class)]
+    private Collection $postReponses;
+
     public function __construct()
     {
-        $this->Response = new ArrayCollection();
+        $this->postReponses = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -77,41 +78,6 @@ class Post
         return $this;
     }
 
-    /**
-     * @return Collection<int, Response>
-     */
-    public function getResponse(): Collection
-    {
-        return $this->Response;
-    }
-
-    public function addResponse(Response $response): self
-    {
-        if (!$this->Response->contains($response)) {
-            $this->Response->add($response);
-            $response->setPost($this);
-        }
-
-        return $this;
-    }
-
-    public function removeResponse(Response $response): self
-    {
-        if ($this->Response->removeElement($response)) {
-            // set the owning side to null (unless already changed)
-            if ($response->getPost() === $this) {
-                $response->setPost(null);
-            }
-        }
-
-        return $this;
-    }
-
-
-
-
-
-
     public function getDate(): ?\DateTimeInterface
     {
         return $this->date;
@@ -120,6 +86,36 @@ class Post
     public function setDate(\DateTimeInterface $date): self
     {
         $this->date = $date;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, PostReponse>
+     */
+    public function getPostReponses(): Collection
+    {
+        return $this->postReponses;
+    }
+
+    public function addPostReponse(PostReponse $postReponse): self
+    {
+        if (!$this->postReponses->contains($postReponse)) {
+            $this->postReponses->add($postReponse);
+            $postReponse->setPostId($this);
+        }
+
+        return $this;
+    }
+
+    public function removePostReponse(PostReponse $postReponse): self
+    {
+        if ($this->postReponses->removeElement($postReponse)) {
+            // set the owning side to null (unless already changed)
+            if ($postReponse->getPostId() === $this) {
+                $postReponse->setPostId(null);
+            }
+        }
 
         return $this;
     }

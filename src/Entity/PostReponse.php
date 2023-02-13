@@ -2,12 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\ResponseRepository;
+use App\Repository\PostReponseRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: ResponseRepository::class)]
-class Response
+#[ORM\Entity(repositoryClass: PostReponseRepository::class)]
+class PostReponse
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -17,8 +17,8 @@ class Response
     #[ORM\Column(type: Types::TEXT)]
     private ?string $content = null;
 
-    #[ORM\ManyToOne(inversedBy: 'Response')]
-    private ?Post $post = null;
+    #[ORM\ManyToOne(inversedBy: 'postReponses')]
+    private ?Post $post_id = null;
 
     public function getId(): ?int
     {
@@ -37,14 +37,14 @@ class Response
         return $this;
     }
 
-    public function getPost(): ?Post
+    public function getPostId(): ?Post
     {
-        return $this->post;
+        return $this->post_id;
     }
 
-    public function setPost(?Post $post): self
+    public function setPostId(?Post $post_id): self
     {
-        $this->post = $post;
+        $this->post_id = $post_id;
 
         return $this;
     }

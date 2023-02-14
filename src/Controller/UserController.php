@@ -26,16 +26,6 @@ class UserController extends AbstractController
         ]);
     }
 
-    // #[Route('/user/account', name: 'app_user_account')]
-    // public function account(string $id, UserRepository $UserRepository): Response
-    // {
-    //     $user = $UserRepository -> find($id);
-    //     return $this->render('user/account.html.twig', [
-    //         'controller_name' => 'UserController',
-    //         'user' => $user,
-    //     ]);
-    // }
-
     #[Route('/user/account', name: 'app_user_account')]
     public function account(Request $request, EntityManagerInterface $entityManager): Response
     {

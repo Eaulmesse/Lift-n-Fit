@@ -46,10 +46,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $pseudonyme = null;
 
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: PostReponse::class)]
+    private Collection $post_reponse;
+
     public function __construct()
     {
         $this->Post = new ArrayCollection();
         $this->Conseil = new ArrayCollection();
+        $this->post_reponse = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -214,6 +218,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPseudonyme(string $pseudonyme): self
     {
         $this->pseudonyme = $pseudonyme;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, PostReponse>
+     */
+    public function getPostReponse(): Collection
+    {
+        return $this->post_reponse;
+    }
+
+    public function addPostReponse(PostReponse $postReponse): self
+    {
+        if (!$this->post_reponse->contains($postReponse)) {
+            $this->post_reponse->add($postReponse);
+            $postReponse->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removePostReponse(PostReponse $postReponse): self
+    {
+        if ($this->post_reponse->removeElement($postReponse)) {
+            // set the owning side to null (unless already changed)
+            if ($postReponse->getUser() === $this) {
+                $postReponse->setUser(null);
+            }
+        }
 
         return $this;
     }

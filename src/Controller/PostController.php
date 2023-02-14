@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Post;
+use App\Entity\PostReponse;
 use App\Entity\User;
 use App\Form\PostFormType;
+use App\Form\PostReponseFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -15,6 +17,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use App\Repository\PostRepository;
+use App\Repository\PostReponseRepository;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 
 class PostController extends AbstractController
@@ -83,13 +86,48 @@ class PostController extends AbstractController
     }
 
     #[Route('/post/{id}', name: 'app_post_id')]
-    public function post(string $id, PostRepository $postRepository): Response
+    public function post(string $id, PostRepository $postRepository, PostReponseRepository $postReponseRepository, Request $request, EntityManagerInterface $entityManager): Response
     {
         $post = $postRepository -> find($id);
+        $reponsePost = $postReponseRepository -> findBy(array('post_id' => $post));
+        $reponse = new PostReponse();
+        $form = $this->createForm(PostReponseFormType::class, $reponse);
+        $date = new \DateTime();
+        $postid = $post->getId();
+        $currentUser = $this->getUser();
+        
+        $form->handleRequest($request);
+        
+
+
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            
+            
+            
+            $reponse->setDate($date);
+            $reponse->setPostId($post);
+            $reponse->setUser($currentUser);
+            
+
+            $entityManager->persist($reponse);
+            $entityManager->flush();          
+
+            dump($reponse);
+            
+            
+
+            return $this->redirectToRoute('app_post_id', ['id' => $postid]);
+        }
+
+        
+
 
         return $this->render('post/post.html.twig', [
             'controller_name' => 'PostController',
             'post' => $post,
+            'reponsePosts' => $reponsePost,
+            'PostReponseForm' => $form->createView(),
         ]);
     }
 

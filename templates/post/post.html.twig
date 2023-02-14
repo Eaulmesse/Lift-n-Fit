@@ -12,7 +12,7 @@
         <div class="lato text-success h1">
             {{ post.name }}
         </div>
-        <div class="lato text-success mt-5">
+        <div class="lato text-success fs-5 mt-5">
             {{ post.content }}
         </div>
 
@@ -25,5 +25,7 @@
     </div>
 </div>
 
-{% include('response/index.html.twig') %}
+{% include('post_reponse/show.html.twig') %}
+{% include('post_reponse/reponse.html.twig') %}
+
 {% endblock %}

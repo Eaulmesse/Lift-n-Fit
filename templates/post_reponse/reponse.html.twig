@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+
+<div class="container d-flex justify-content-between pt-5">
+    <div class="lato text-success">
+        <div>
+            {{ form_start(PostReponseForm) }}
+            {{ form_widget(PostReponseForm.content )}}
+
+
+            <div>
+                <button type="submit" class="float-end mt-3 btn btn-outline-success">Valider</button>
+            </div>
+
+            {{ form_end(PostReponseForm) }}
+        </div>
+    </div>
+</div>
+{% endblock %}

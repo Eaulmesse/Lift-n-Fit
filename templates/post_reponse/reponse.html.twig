@@ -3,19 +3,22 @@
 
 {% block body %}
 
-<div class="container d-flex justify-content-between pt-5">
-    <div class="lato text-success">
-        <div>
-            {{ form_start(PostReponseForm) }}
-            {{ form_widget(PostReponseForm.content )}}
-
-
+{% if is_granted('ROLE_USER') %}
+    <div class="container d-flex justify-content-between pt-5">
+        <div class="lato text-success">
             <div>
-                <button type="submit" class="float-end mt-3 btn btn-outline-success">Valider</button>
-            </div>
+                {{ form_start(PostReponseForm) }}
+                {{ form_widget(PostReponseForm.content )}}
 
-            {{ form_end(PostReponseForm) }}
+
+                <div>
+                    <button type="submit" class="float-end mt-3 btn btn-outline-success">Valider</button>
+                </div>
+
+                {{ form_end(PostReponseForm) }}
+            </div>
         </div>
     </div>
-</div>
+{% endif %}
+
 {% endblock %}

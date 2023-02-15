@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\PostRepository;
+use App\Entity\PostReponse;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -30,7 +31,14 @@ class Post
     private ?\DateTimeInterface $date = null;
 
     #[ORM\OneToMany(mappedBy: 'post_id', targetEntity: PostReponse::class)]
+    #[ORM\JoinColumn(onDelete: "SET NULL")]
     private Collection $postReponses;
+
+    // #[ORM\ManyToOne(targetEntity: Post::class, inversedBy: 'idAthlete')]
+    // #[ORM\JoinColumn(onDelete: "SET NULL")]
+    // private $team;
+
+
 
     public function __construct()
     {

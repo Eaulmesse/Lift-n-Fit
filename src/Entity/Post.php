@@ -30,8 +30,8 @@ class Post
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $date = null;
 
-    #[ORM\OneToMany(mappedBy: 'post_id', targetEntity: PostReponse::class)]
-    #[ORM\JoinColumn(onDelete: "SET NULL")]
+    #[ORM\OneToMany(mappedBy: 'post_id', targetEntity: PostReponse::class, cascade: array("remove"))]
+    #[ORM\JoinColumn(name: 'post_id_id')]
     private Collection $postReponses;
 
     // #[ORM\ManyToOne(targetEntity: Post::class, inversedBy: 'idAthlete')]

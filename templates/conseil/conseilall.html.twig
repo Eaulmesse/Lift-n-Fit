@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tous les conseils{% endblock %}
+
+
+{% block body %}
+{% include('navbar.html.twig') %}
+
+{% if is_granted('ROLE_USER') and (currentUser.coach == 1) %}
+    <a class="lato link-success fs-5" href="{{ path('app_conseil_create')}}">Créer un post </a>
+{% endif %}
+
+
+<div class="container mt-5 d-flex align-items-center flex-column flex-wrap">
+    {% for conseil in conseils %}
+        <div class="lato p-3 w-100 border-top border-bottom border-success border-1">
+            <a class="link-success fs-5 mb-3" href={{ path('app_conseil_id', {'id': conseil.id })}}>
+                {{ conseil.name }}
+            </a>
+            <div class="d-block text-truncate mt-3 mb-2" style="max-width: 100%">
+                {{ conseil.content }}
+            </div>
+            {{ conseil.user.pseudonyme }}
+        </div>
+
+    {% endfor %}
+</div>
+{% endblock %}

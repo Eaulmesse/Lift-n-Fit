@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Mon compte{% endblock %}
+{% block title %}Forum{% endblock %}
 
 
 {% block body %}
@@ -14,13 +14,12 @@
             <a class="btn btn-success lato link-light fs-6 mb-2" href=""> Modifier ce post</a>
     {% endif %}
 
-    <div class="d-flex justify-content-between">
-    
+    <div class="d-flex justify-content-between w-100">
         <div>
-            <div class="lato text-success h1">
+            <div class="lato text-success h1 w-100">
                 {{ post.name }}
             </div>
-            <div class="lato text-success fs-5 mt-5">
+            <div class="lato text-success fs-5 mt-5 w-100">
                 {{ post.content }}
             </div>
 

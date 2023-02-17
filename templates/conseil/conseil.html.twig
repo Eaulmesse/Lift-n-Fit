@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Conseil{% endblock %}
+
+
+{% block body %}
+{% include('navbar.html.twig') %}
+
+
+<div class="container pt-5">
+    <div class="d-flex justify-content-between w-100">
+        <div>
+            <div class="lato text-success h1 w-100">
+                {{ conseil.name }}
+            </div>
+            <div class="lato text-success fs-5 mt-5 w-100">
+                {{ conseil.content }}
+            </div>
+            <div class="lato text-success fs-5 mt-5">
+                {{ conseil.user.pseudonyme}}
+            </div>
+            <div class="lato text-success fs-5">
+                {{ conseil.date |date("d/m/Y")}}
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

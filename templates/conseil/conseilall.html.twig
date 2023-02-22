@@ -14,7 +14,7 @@
 <div class="container mt-5 d-flex align-items-center flex-column flex-wrap">
     {% for conseil in conseils %}
         <div class="lato p-3 w-100 border-top border-bottom border-success border-1">
-            <a class="link-success fs-5 mb-3" href={{ path('app_conseil_id', {'id': conseil.id })}}>
+            <a class="link-success fs-5 mb-3 d-block text-truncate" style="max-width: 100%" href={{ path('app_conseil_id', {'id': conseil.id })}}>
                 {{ conseil.name }}
             </a>
             <div class="d-block text-truncate mt-3 mb-2" style="max-width: 100%">

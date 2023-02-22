@@ -55,3 +55,17 @@
     background-color: #1111;
     opacity: 0.9;
 }
+
+.mobile-only {
+    @extend .d-block;
+    @extend .d-lg-none;
+}
+
+.desktop-only {
+    @extend .d-none;
+    @extend .d-lg-block;
+}
+
+.navbar-toggler:focus {
+    box-shadow: none !important;
+}

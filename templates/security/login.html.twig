@@ -7,7 +7,7 @@
 {% block body %}
 {% include 'navbar.html.twig' %}
 
-<div class="container d-flex justify-content-between pt-5">
+<div class="container d-flex justify-content-center pt-5">
     <form class="lato text-success" method="post">
         {% if error %}
             <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>

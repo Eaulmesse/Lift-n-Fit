@@ -1,41 +1,44 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Register
+{% endblock %}
 
 {% block body %}
-{% include 'navbar.html.twig' %}
+	{% include 'navbar.html.twig' %}
 
-<div class="container d-flex justify-content-center pt-5">
+	<div class="container d-flex justify-content-center p-5">
 
-    <div class="lato">
-        {% for flash_error in app.flashes('verify_email_error') %}
-            <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
-        {% endfor %}
+		<div class="lato">
+			{% for flash_error in app.flashes('verify_email_error') %}
+				<div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+			{% endfor %}
 
-        <h1 class='mb-3'>Créer un compte</h1>
+			<h1 class='mb-3'>Créer un compte</h1>
 
-        {{ form_start(registrationForm) }}
-            {{ form_row(registrationForm.pseudonyme) }}
-            {{ form_row(registrationForm.email) }}
-            {{ form_row(registrationForm.plainPassword, {
+			{{ form_start(registrationForm) }}
+			{{ form_row(registrationForm.pseudonyme) }}
+			{{ form_row(registrationForm.email) }}
+			{{ form_row(registrationForm.plainPassword, {
                 label: 'Password'
             }) }}
-            {{ form_row(registrationForm.coach) }}
-            {{ form_row(registrationForm.agreeTerms) }}
+			{{ form_row(registrationForm.coach) }}
+			{{ form_row(registrationForm.agreeTerms) }}
 
-            <div>
-                <button type="submit" class="btn btn-outline-success">Créer un compte</button>
-            </div>
+			<div>
+				<button type="submit" class="btn btn-outline-success">Créer un compte</button>
+			</div>
 
-            <div>
-                <a href={{ path('app_login') }} type="submit" class="btn btn-outline-success mt-2">Déjà un compte ?</a>
-            </div>
-             
-        {{ form_end(registrationForm) }}
-    </div>
+			<div>
+				<a href={{ path('app_login') }} type="submit" class="btn btn-outline-success mt-2">Déjà un compte ?</a>
+			</div>
 
-    <div class="desktop-only ps-5">
-        <img src={{ asset('media/workout-login.jpg') }} class="img-fluid" alt="...">
-    </div>
-</div>
+			{{ form_end(registrationForm) }}
+		</div>
+
+		<div class="desktop-only ps-5">
+			<img src={{ asset('media/workout-login.jpg') }} class="img-fluid" alt="...">
+		</div>
+	</div>
+
+    {% include "footer.html.twig" %}
 {% endblock %}

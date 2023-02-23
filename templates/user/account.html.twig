@@ -1,48 +1,59 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Mon compte{% endblock %}
+{% block title %}Mon compte
+{% endblock %}
 
 
 {% block body %}
-{% include('navbar.html.twig') %}
+	{% include('navbar.html.twig') %}
+	{% include "modal/modal_delete.html.twig" %}
 
-<div class="container d-flex justify-content-center pt-5">
-    <div class="lato text-success">
-        <h1> Mon Compte </h1>
+	<div class="container d-flex justify-content-center pt-5">
+		<div class="lato text-success">
+			<h1>
+				Mon Compte
+			</h1>
 
-        <div>
-            <ul class="list-unstyled">
-                <li>Pseudonyme : {{user.pseudonyme}}</li>
-                <li>Email : {{user.email}}</li>
-                <li>Mot de passe : <a href={{ path('app_forgot_password_request') }} class="btn btn-outline-success" type="submit"> Modifier </a> </li>
-            </ul>
+			<div>
+				<ul class="list-unstyled">
+					<li>Pseudonyme :
+						{{user.pseudonyme}}</li>
+					<li>Email :
+						{{user.email}}</li>
+					<li>Mot de passe :
+						<a href={{ path('app_forgot_password_request') }} class="btn btn-outline-success" type="submit">
+							Modifier
+						</a>
+					</li>
+				</ul>
 
-        </div>
+			</div>
 
-        <div>
-        {% if user.coach == 0 %}
-            {{ form_start(coachForm) }}
-            {{ form_row(coachForm.coach) }}
-
-
-            <div>
-                <button type="submit" class="btn btn-outline-success">Valider</button>
-            </div>
-
-            {{ form_end(coachForm) }}
-        {% endif %}
-        </div>
-
-        <a class="btn btn-success lato link-light fs-5" href="{{ path('app_user_delete', {'id': user.id}) }}"> Supprimer mon compte</a>
+			<div>
+				{% if user.coach == 0 %}
+					{{ form_start(coachForm) }}
+					{{ form_row(coachForm.coach) }}
 
 
-        
-    </div>
+					<div>
+						<button type="submit" class="btn btn-outline-success">Valider</button>
+					</div>
 
-    
+					{{ form_end(coachForm) }}
+				{% endif %}
+			</div>
 
-    <div class="desktop-only ps-5">
-        <img src={{ asset('media/workout-login.jpg') }} class="img-fluid" alt="...">
-    </div>
-</div>
+			<button class="btn btn-success lato link-light fs-5" data-bs-toggle="modal" data-bs-target="#modalDelete">Supprimer mon compte</button>
+
+
+		</div>
+
+
+		<div class="desktop-only ps-5">
+			<img src={{ asset('media/workout-login.jpg') }} class="img-fluid" alt="...">
+		</div>
+	</div>
+
+
+    {% include "footer.html.twig" %}
 {% endblock %}

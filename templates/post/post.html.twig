@@ -1,39 +1,43 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Forum{% endblock %}
+{% block title %}Forum
+{% endblock %}
 
 
 {% block body %}
-{% include('navbar.html.twig') %}
+	{% include('navbar.html.twig') %}
 
 
-<div class="container pt-5">
+	<div class="container pt-5">
 
-    {% if post.user.id == currentUser.id %}
-            <a class="btn btn-success lato link-light fs-6 mb-2" href="{{ path('app_post_delete', {'id': post.id}) }}"> Supprimer ce post</a>
-            <a class="btn btn-success lato link-light fs-6 mb-2" href=""> Modifier ce post</a>
-    {% endif %}
+		{% if post.user.id == currentUser.id %}
+			<a class="btn btn-success lato link-light fs-6 mb-2" href="{{ path('app_post_delete', {'id': post.id}) }}">
+				Supprimer ce post</a>
+			<a class="btn btn-success lato link-light fs-6 mb-2" href="">
+				Modifier ce post</a>
+		{% endif %}
 
-    <div class="d-flex justify-content-between w-100 text-wrap text-break">
-        <div>
-            <div class="lato text-success fs-1 w-100 ">
-                {{ post.name }}
-            </div>
-            <div class="lato text-success fs-5 mt-5 w-100 ">
-                {{ post.content }}
-            </div>
+		<div class="d-flex justify-content-between w-100 text-wrap text-break">
+			<div>
+				<div class="lato text-success fs-1 w-100 ">
+					{{ post.name }}
+				</div>
+				<div class="lato text-success fs-5 mt-5 w-100 ">
+					{{ post.content }}
+				</div>
 
-            <div class="lato text-success fs-5 mt-5">
-                {{ post.user.pseudonyme}}
-            </div>
-            <div class="lato text-success fs-6">
-                {{ post.date|date("d/m/Y") }}
-            </div>
-        </div>
-    </div>
-</div>
+				<div class="lato text-success fs-5 mt-5">
+					{{ post.user.pseudonyme}}
+				</div>
+				<div class="lato text-success fs-6">
+					{{ post.date|date("d/m/Y") }}
+				</div>
+			</div>
+		</div>
+	</div>
 
-{% include('post_reponse/show.html.twig') %}
-{% include('post_reponse/reponse.html.twig') %}
-
+	{% include('post_reponse/show.html.twig') %}
+	{% include('post_reponse/reponse.html.twig') %}
+    
+    {% include "footer.html.twig" %}
 {% endblock %}

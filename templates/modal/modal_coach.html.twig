@@ -1,0 +1,17 @@
+<div class="modal fade" id="modalCoach" tabindex="-1" aria-labelledby="modalCoachLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalCoachLabel">Confirmation</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Voulez vous vraiment passer votre compte en coach ?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-border-secondary" data-bs-dismiss="modal">Non</button>
+        <a type="button" class="btn btn-success" href="{{ path('app_user_delete', {'id': user.id}) }}">Oui</a>
+      </div>
+    </div>
+  </div>
+</div>

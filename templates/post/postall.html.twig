@@ -1,34 +1,36 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Tous les posts{% endblock %}
+{% block title %}Tous les posts
+{% endblock %}
 
 
 {% block body %}
-{% include('navbar.html.twig') %}
+	{% include('navbar.html.twig') %}
 
 
+	<div class="container mt-5 d-flex flex-column flex-wrap">
 
+		{% if is_granted('ROLE_USER') %}
+			<a class="lato link-success fs-5" href="{{ path('app_post_create')}}">Créer un post
+			</a>
+		{% else %}
+			<a class="lato link-success fs-5" href="{{ path('app_login')}}">Créer un post
+			</a>
+		{% endif %}
 
+		{% for post in posts %}
+			<div class="lato border border-success m-3 p-1 rounded" style="max-width: 40%">
+				<a class="link-success fs-5 d-block text-truncate" style="max-width: 100%" href={{ path('app_post_id', {'id': post.id } )}}>
+					{{ post.name }}
+				</a>
+				<div class="d-block text-truncate" style="max-width: 100%">
+					{{ post.content }}
+				</div>
+				{{ post.user.pseudonyme }}
+			</div>
 
-<div class="container mt-5 d-flex flex-column flex-wrap">
+		{% endfor %}
+	</div>
 
-    {% if is_granted('ROLE_USER') %}
-        <a class="lato link-success fs-5" href="{{ path('app_post_create')}}">Créer un post </a>
-    {% else %}
-        <a class="lato link-success fs-5" href="{{ path('app_login')}}">Créer un post </a>
-    {% endif %}
-
-    {% for post in posts %}
-        <div class="lato border border-success m-3 p-1 rounded" style="max-width: 40%">
-            <a class="link-success fs-5 d-block text-truncate" style="max-width: 100%" href={{ path('app_post_id', {'id': post.id })}}>
-                {{ post.name }}
-            </a>
-            <div class="d-block text-truncate" style="max-width: 100%">
-                {{ post.content }}
-            </div>
-            {{ post.user.pseudonyme }}
-        </div>
-
-    {% endfor %}
-</div>
+    {% include "footer.html.twig" %}
 {% endblock %}

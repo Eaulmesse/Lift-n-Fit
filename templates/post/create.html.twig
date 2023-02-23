@@ -1,31 +1,33 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Création de post{% endblock %}
+{% block title %}Création de post
+{% endblock %}
 
 
 {% block body %}
-{% include('navbar.html.twig') %}
+	{% include('navbar.html.twig') %}
 
-<div class="container d-flex justify-content-between pt-5">
-    <div class="lato text-success">
-        <div>
-            {{ form_start(PostForm) }}
-            {{form_row(PostForm.name)}}
+	<div class="container d-flex justify-content-between pt-5">
+		<div class="lato text-success">
+			<div>
+				{{ form_start(PostForm) }}
+				{{form_row(PostForm.name)}}
 
-            {{form_row(PostForm.content)}}
+				{{form_row(PostForm.content)}}
 
-            <div>
-                <button type="submit" class="btn btn-outline-success">Valider</button>
-            </div>
+				<div>
+					<button type="submit" class="btn btn-outline-success">Valider</button>
+				</div>
 
-            {{ form_end(PostForm) }}
-        </div>
-    </div>
+				{{ form_end(PostForm) }}
+			</div>
+		</div>
 
-    
 
-    <div>
-        <img src={{ asset('media/workout-login.jpg') }} class="img-fluid" alt="...">
-    </div>
-</div>
+		<div>
+			<img src={{ asset('media/workout-login.jpg') }} class="img-fluid" alt="...">
+		</div>
+	</div>
+
+    {% include "footer.html.twig" %}
 {% endblock %}

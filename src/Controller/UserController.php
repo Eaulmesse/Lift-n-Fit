@@ -9,6 +9,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -32,7 +33,12 @@ class UserController extends AbstractController
         $user = $this->getUser();
 
         $form = $this->createFormBuilder($user)
-            ->add('coach',CheckBoxType::class)
+            // ->add('coach',ButtonType::class)
+
+            ->add('coach', ButtonType::class,
+            [
+            'attr' => ['btn', 'btn-success'],
+            ])
             ->getForm();
             $form->handleRequest($request);
 

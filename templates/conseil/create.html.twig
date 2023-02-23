@@ -1,31 +1,33 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Création de conseil{% endblock %}
+{% block title %}Création de conseil
+{% endblock %}
 
 
 {% block body %}
-{% include('navbar.html.twig') %}
+	{% include('navbar.html.twig') %}
 
-<div class="container d-flex justify-content-between pt-5">
-    <div class="lato text-success">
-        <div>
-            {{ form_start(ConseilForm) }}
-            {{form_row(ConseilForm.name)}}
+	<div class="container d-flex justify-content-between pt-5">
+		<div class="lato text-success">
+			<div>
+				{{ form_start(ConseilForm) }}
+				{{form_row(ConseilForm.name)}}
 
-            {{form_row(ConseilForm.content)}}
+				{{form_row(ConseilForm.content)}}
 
-            <div>
-                <button type="submit" class="btn btn-outline-success">Valider</button>
-            </div>
+				<div>
+					<button type="submit" class="btn btn-outline-success">Valider</button>
+				</div>
 
-            {{ form_end(ConseilForm) }}
-        </div>
-    </div>
+				{{ form_end(ConseilForm) }}
+			</div>
+		</div>
 
-    
 
-    <div>
-        <img src={{ asset('media/workout-login.jpg') }} class="img-fluid" alt="...">
-    </div>
-</div>
+		<div>
+			<img src={{ asset('media/workout-login.jpg') }} class="img-fluid" alt="...">
+		</div>
+	</div>
+
+    {% include "footer.html.twig" %}
 {% endblock %}

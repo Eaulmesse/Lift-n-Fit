@@ -1,25 +1,24 @@
 {% extends 'base.html.twig' %}
 {% block body %}
 
-<div class="container justify-content-between pt-5">
-   
-    {% for reponsePost in reponsePosts %}
-        <div>
-            <hr>
-            <div class="lato text-success fs-6 mt-5">
-                {{ reponsePost.content }}
-            </div> 
-            <div class="lato text-success fs-6 mt-2">
-                {{ reponsePost.user.pseudonyme}}
-            </div> 
-            <div class="lato text-success fs-6">
-                {{ reponsePost.date|date("d/m/Y") }}
-            </div>
-        </div>
+	<div class="container justify-content-between pt-5">
 
-    {% endfor %}
+		{% for reponsePost in reponsePosts %}
+			<div>
+				<hr>
+				<div class="lato text-success fs-6 mt-5">
+					{{ reponsePost.content }}
+				</div>
+				<div class="lato text-success fs-6 mt-2">
+					{{ reponsePost.user.pseudonyme}}
+				</div>
+				<div class="lato text-success fs-6">
+					{{ reponsePost.date|date("d/m/Y") }}
+				</div>
+			</div>
 
-</div>
+		{% endfor %}
 
+	</div>
 
 {% endblock %}

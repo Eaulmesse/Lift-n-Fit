@@ -11,6 +11,7 @@ use App\Entity\Conseil;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use App\Repository\ConseilRepository;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class ConseilController extends AbstractController
 {
@@ -51,6 +52,10 @@ class ConseilController extends AbstractController
             ->add('content', TextareaType::class,
             [
             'attr' => ['cols' => '50', 'rows' => '10'],
+            ])
+            ->add('imageFile', VichImageType::class,
+            [
+                'label' => "Image d'illustration",
             ])
             ->getForm();
 

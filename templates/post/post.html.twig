@@ -6,17 +6,10 @@
 
 {% block body %}
 	{% include('navbar.html.twig') %}
+	{% include "modal/modal_delete_post.html.twig" %}
 
 
 	<div class="container pt-5">
-
-		{% if post.user.id == currentUser.id %}
-			<a class="btn btn-success lato link-light fs-6 mb-2" href="{{ path('app_post_delete', {'id': post.id}) }}">
-				Supprimer ce post</a>
-			<a class="btn btn-success lato link-light fs-6 mb-2" href="">
-				Modifier ce post</a>
-		{% endif %}
-
 		<div class="d-flex justify-content-between w-100 text-wrap text-break">
 			<div>
 				<div class="lato text-success fs-1 w-100 ">
@@ -32,6 +25,10 @@
 				<div class="lato text-success fs-6">
 					{{ post.date|date("d/m/Y") }}
 				</div>
+
+				{% if post.user.id is defined and post.user.id == currentUser.id %}
+					<button class="btn btn-success lato link-light" data-bs-toggle="modal" data-bs-target="#modalDelete">Supprimer ce post</button>
+				{% endif %}
 			</div>
 		</div>
 	</div>

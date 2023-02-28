@@ -56,6 +56,7 @@ class ConseilController extends AbstractController
             ->add('imageFile', VichImageType::class,
             [
                 'label' => "Image d'illustration",
+                'required' => false,
             ])
             ->getForm();
 

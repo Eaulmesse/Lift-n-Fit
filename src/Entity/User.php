@@ -37,16 +37,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?bool $coach = null;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Post::class)]
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Post::class, cascade: array("remove"))]
     private Collection $Post;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Conseil::class)]
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Conseil::class, cascade: array("remove"))]
     private Collection $Conseil;
 
     #[ORM\Column(length: 255)]
     private ?string $pseudonyme = null;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: PostReponse::class)]
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: PostReponse::class, cascade: array("remove"))]
     private Collection $post_reponse;
 
     public function __construct()

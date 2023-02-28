@@ -1,12 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Conseil
+{% block title %}{{ conseil.name }}
 {% endblock %}
 
 
 {% block body %}
 	{% include('navbar.html.twig') %}
-
 
 	<div class="container pt-5">
 		<div class="d-flex justify-content-between w-100 text-wrap text-break">
@@ -15,6 +14,11 @@
 					{{ conseil.name }}
 				</div>
 				<div class="lato text-success fs-5 mt-5 w-100">
+					{% if vich_uploader_asset(conseil) != NULL %}
+						<div class="container w-100 d-flex justify-content-center my-5 ">
+							<img class="w-75" src="{{ vich_uploader_asset(conseil) }}">
+						</div>
+					{% endif %}
 					{{ conseil.content }}
 				</div>
 				<div class="lato text-success fs-5 mt-5">
@@ -26,6 +30,7 @@
 				<div class="lato text-success fs-5">
 					{{ conseil.date |date("d/m/Y")}}
 				</div>
+
 			</div>
 		</div>
 	</div>

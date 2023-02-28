@@ -7,13 +7,15 @@
 {% block body %}
 	{% include('navbar.html.twig') %}
 
-	{% if is_granted('ROLE_USER') and (currentUser.coach == 1) %}
-		<a class="lato link-success fs-5" href="{{ path('app_conseil_create')}}">Créer un post
-		</a>
-	{% endif %}
+	
 
 
 	<div class="container mt-5 d-flex align-items-center flex-column flex-wrap">
+
+		{% if is_granted('ROLE_USER') and (currentUser.coach == 1) %}
+			<a class="lato btn btn-success fs-5 w-100" href="{{ path('app_conseil_create')}}">Créer un conseil</a>
+		{% endif %}
+
 		{% for conseil in conseils %}
 			<div class="lato p-3 w-100 border-bottom border-success border-1">
 				<a class="link-success fs-5 mb-3 d-block text-truncate" style="max-width: 100%" href={{ path('app_conseil_id', {'id': conseil.id } )}}>

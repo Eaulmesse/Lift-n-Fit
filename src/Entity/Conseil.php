@@ -20,7 +20,7 @@ class Conseil
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[Vich\UploadableField(mapping: 'images', fileNameProperty: 'imageName', size: 'imageSize')]
+    #[Vich\UploadableField(mapping: 'images', fileNameProperty: 'imageName')]
     private ?File $imageFile = null;
 
     #[ORM\Column(nullable: true)]

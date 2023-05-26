@@ -19,23 +19,27 @@
                             <a class="nav-link lato link-success fs-5" href="{{ path('app_logout') }}">Deconnexion</a> 
                         </li>
                     {% else %}
+
                         <li class="nav-item">
                         <a class="nav-link lato link-success fs-5" href="{{ path('app_login') }}">Connexion</a>
                         </li>
                         <li class="nav-item">
                         <a class="nav-link lato link-success fs-5" href="{{ path('app_register') }}">Créer son compte</a>
                         </li>
+
                     {% endif %}
+
                     <li class="nav-item mobile-only">
                         <a class="nav-link lato link-success fs-5" href="{{ path('app_conseil_all')}}">Conseil</a>
                     </li>
                     <li class="nav-item mobile-only">
                         <a class="nav-link lato link-success fs-5" href="{{ path('app_post_all')}}">Forum</a>
                     </li>
+
                     {% if is_granted('ROLE_USER') %}
-                    <li class="nav-item mobile-only">
-                        <a class="nav-link lato link-success fs-5" href="{{ path('app_user_account')}}">Mon compte</a>
-                    </li>
+                        <li class="nav-item mobile-only">
+                            <a class="nav-link lato link-success fs-5" href="{{ path('app_user_account')}}">Mon compte</a>
+                        </li>
                     {% endif %}
                     
 
@@ -56,6 +60,9 @@
                     <li class="nav-item">
                         <a class="nav-link lato link-light fs-5" href="{{ path('app_post_all')}}">Forum</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link lato link-light fs-5" href="{{ path('app_coach_list')}}">Les coachs</a>
+                    </li>
 
                 </ul>
             </div>
@@ -63,12 +70,23 @@
         
 
         <div class="right-side">
-            <div class="collapse navbar-collapse desktop-only " id="navbarSupportedContent">
+            <div class="collapse navbar-collapse desktop-only" id="navbarSupportedContent">
                 <ul class="navbar-nav text-end">
+                
                     {% if is_granted('ROLE_USER') %}
-                    <li class="nav-item">
-                        <a class="nav-link lato link-light fs-5" href="{{ path('app_user_account')}}">Mon compte</a>
-                    </li>
+                        
+                        {% if app.user.coach %}
+
+                            <li class="nav-item">
+                                <a class="nav-link lato link-light fs-5" href="{{ path('app_coach_profil', {'id': app.user.id })}}">Mon profil</a>
+                            </li>
+
+                        {% endif %}
+
+
+                        <li class="nav-item">
+                            <a class="nav-link lato link-light fs-5" href="{{ path('app_user_account')}}">Mon compte</a>
+                        </li>
                     {% endif %}
                 </ul>
             </div>

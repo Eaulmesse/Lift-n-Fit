@@ -15,13 +15,6 @@ use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class ConseilController extends AbstractController
 {
-    // #[Route('/conseil', name: 'app_conseil')]
-    // public function index(): Response
-    // {
-    //     return $this->render('conseil/index.html.twig', [
-    //         'controller_name' => 'ConseilController',
-    //     ]);
-    // }
 
     #[Route('/conseil/all', name: 'app_conseil_all')]
     public function conseilAll(ConseilRepository $conseilRepository): Response

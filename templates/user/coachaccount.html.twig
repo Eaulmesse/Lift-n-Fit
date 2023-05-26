@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon compte
+{% endblock %}
+
+
+{% block body %}
+	{% include('navbar.html.twig') %}
+
+	{% if user.coach == 0 %}
+
+		Cet utilisateur n'est pas un coach et ne possède par conséquent pas de profil public
+
+    {% else %}
+
+        <div class="container pt-5 w-100">
+
+            <div class="d-flex justify-content-center row mb-3">
+                <div class="col-md-4 col-12">
+                    <img class="rounded w-100" src="{{ vich_uploader_asset(user, 'imageFile')}}" alt="">
+                </div>
+                
+                <div class="col-md-8 col-12">
+                    <p class="lato text-success fs-1">{{user.pseudonyme}}</p>
+                    
+                    <p style="text-align: justify;">{{user.content}}</p>
+                    <p class="lato text-success fs-5">{{user.email}}</p>
+                    
+                </div>
+            </div>
+
+            {% if app.user == user %}
+                <div class="my-5">
+                    {{ form_start(formContent) }}
+                    {{ form_row(formContent.content) }}
+                    <div>
+                        <button type="submit" class="btn btn-outline-success">Valider</button>
+                    </div>
+                    {{ form_end(formContent) }}
+                </div>
+            {% endif %}
+            
+        </div>
+
+	{% endif %}
+
+
+
+    {% include "footer.html.twig" %}
+{% endblock %}

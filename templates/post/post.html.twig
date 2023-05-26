@@ -26,8 +26,10 @@
 					{{ post.date|date("d/m/Y") }}
 				</div>
 
-				{% if post.user.id is defined and post.user.id == currentUser.id %}
-					<button class="btn btn-success lato link-light" data-bs-toggle="modal" data-bs-target="#modalDelete">Supprimer ce post</button>
+				{% if is_granted("ROLE_USER") %}	
+					{% if post.user.id is defined and post.user.id == currentUser.id %}
+						<button class="btn btn-success lato link-light" data-bs-toggle="modal" data-bs-target="#modalDelete">Supprimer ce post</button>
+					{% endif %}
 				{% endif %}
 			</div>
 		</div>

@@ -78,12 +78,6 @@ class PostController extends AbstractController
         } else {
             return $this->redirectToRoute('app_login');
         }
-
-
-
-        
-        
-        
     }
 
     #[Route('/post/{id}', name: 'app_post_id')]
@@ -98,31 +92,17 @@ class PostController extends AbstractController
         $currentUser = $this->getUser();
         
         $form->handleRequest($request);
-        
-
-
-
+    
         if ($form->isSubmitted() && $form->isValid()) {
-            
-            
-            
             $reponse->setDate($date);
             $reponse->setPostId($post);
             $reponse->setUser($currentUser);
-            
-
+        
             $entityManager->persist($reponse);
             $entityManager->flush();          
-
-            dump($reponse);
             
-            
-
             return $this->redirectToRoute('app_post_id', ['id' => $postid]);
         }
-
-        
-
 
         return $this->render('post/post.html.twig', [
             'controller_name' => 'PostController',

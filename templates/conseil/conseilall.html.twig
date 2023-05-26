@@ -6,10 +6,6 @@
 
 {% block body %}
 	{% include('navbar.html.twig') %}
-
-	
-
-
 	<div class="container mt-5 d-flex align-items-center flex-column flex-wrap">
 
 		{% if is_granted('ROLE_USER') and (currentUser.coach == 1) %}
@@ -29,6 +25,5 @@
 
 		{% endfor %}
 	</div>
-
     {% include "footer.html.twig" %}
 {% endblock %}

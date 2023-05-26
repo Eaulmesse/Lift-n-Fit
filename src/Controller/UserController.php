@@ -4,18 +4,15 @@ namespace App\Controller;
 
 use App\Entity\User;
 use Symfony\Component\HttpFoundation\Request;
-use App\Form\CoachFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\UserRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\HttpFoundation\Session\Session;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Knp\Component\Pager\PaginatorInterface;
 
 class UserController extends AbstractController
 {
@@ -81,13 +78,17 @@ class UserController extends AbstractController
     }
 
     #[Route('/coachlist', name: 'app_coach_list')]
-    public function coachAll(EntityManagerInterface $entityManager, UserRepository $UserRepository): Response
+    public function coachAll(EntityManagerInterface $entityManager, UserRepository $UserRepository, Request $request, PaginatorInterface $paginator): Response
     {
-        $users = $UserRepository -> findall();
-        
+
+        $pagination = $paginator->paginate(
+            $UserRepository->paginationQuery(),
+            $request->query->get('page', 1)
+        );
+
         return $this->render('user/coachall.html.twig', [
             'controller_name' => 'userController',
-            'users' => $users,
+            'pagination' => $pagination
         ]);
     }
 

@@ -90,6 +90,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function getPseudonyme(): ?string
+    {
+        return $this->pseudonyme;
+    }
+
+    public function setPseudonyme(string $pseudonyme): self
+    {
+        $this->pseudonyme = $pseudonyme;
+
+        return $this;
+    }
+
     /**
      * A visual identifier that represents this user.
      *
@@ -227,17 +239,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getPseudonyme(): ?string
-    {
-        return $this->pseudonyme;
-    }
-
-    public function setPseudonyme(string $pseudonyme): self
-    {
-        $this->pseudonyme = $pseudonyme;
-
-        return $this;
-    }
+    
 
     /**
      * @return Collection<int, PostReponse>

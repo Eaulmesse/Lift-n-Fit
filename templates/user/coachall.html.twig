@@ -7,7 +7,7 @@
 {% block body %}
 	{% include('navbar.html.twig') %}
     <div class="container-fluid w-100 d-flex flex-wrap my-5">
-        {% for user in users %}
+        {% for user in pagination %}
             {% if user.coach %}
             <div class="d-flex m-5">
                 <img class="rounded img-fluid " style="width: 125px; heigth: auto;" src="{{ vich_uploader_asset(user, 'imageFile')}}" alt="">
@@ -15,12 +15,15 @@
                     <p class="fs-2 text-success lato">{{ user.pseudonyme }}</p>
                     <a class="btn btn-success" href="{{ path('app_coach_profil', {'id': user.id })}}">Accéder au profil</a>
                 </div>
-                
             </div>
-                
             {% endif %}
-            
         {% endfor %}
     </div>
+
+    <div class="d-flex justify-content-center mb-2"> 
+        {{knp_pagination_render(pagination)}}
+    </div>
+
+
     {% include "footer.html.twig" %}
 {% endblock %}

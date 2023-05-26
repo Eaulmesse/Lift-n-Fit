@@ -78,7 +78,7 @@ class UserController extends AbstractController
     }
 
     #[Route('/coachlist', name: 'app_coach_list')]
-    public function coachAll(EntityManagerInterface $entityManager, UserRepository $UserRepository, Request $request, PaginatorInterface $paginator): Response
+    public function coachAll(UserRepository $UserRepository, Request $request, PaginatorInterface $paginator): Response
     {
 
         $pagination = $paginator->paginate(

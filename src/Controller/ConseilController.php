@@ -12,19 +12,25 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use App\Repository\ConseilRepository;
 use Vich\UploaderBundle\Form\Type\VichImageType;
+use Knp\Component\Pager\PaginatorInterface;
 
 class ConseilController extends AbstractController
 {
 
     #[Route('/conseil/all', name: 'app_conseil_all')]
-    public function conseilAll(ConseilRepository $conseilRepository): Response
+    public function conseilAll(ConseilRepository $ConseilRepository,Request $request, PaginatorInterface $paginator): Response
     {
-        $conseil = $conseilRepository -> findall();
+        // $conseil = $conseilRepository -> findall();
         $currentUser = $this->getUser();
+
+        $pagination = $paginator->paginate(
+            $ConseilRepository->paginationQuery(),
+            $request->query->get('page', 1)
+        );
         
         return $this->render('conseil/conseilall.html.twig', [
             'controller_name' => 'ConseilController',
-            'conseils' => $conseil,
+            'pagination' => $pagination,
             'currentUser' => $currentUser
         ]);
     }
@@ -83,11 +89,6 @@ class ConseilController extends AbstractController
     public function post(string $id, ConseilRepository $conseilRepository, Request $request, EntityManagerInterface $entityManager): Response
     {
         $conseil = $conseilRepository -> find($id);
-        $conseilId = $conseil->getId();
-        
-
-        
-
 
         return $this->render('conseil/conseil.html.twig', [
             'controller_name' => 'PostController',

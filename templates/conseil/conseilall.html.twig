@@ -12,7 +12,7 @@
 			<a class="lato btn btn-success fs-5 w-100" href="{{ path('app_conseil_create')}}">Créer un conseil</a>
 		{% endif %}
 
-		{% for conseil in conseils %}
+		{% for conseil in pagination %}
 			<div class="lato p-3 w-100 border-bottom border-success border-1">
 				<a class="link-success fs-5 mb-3 d-block text-truncate" style="max-width: 100%" href={{ path('app_conseil_id', {'id': conseil.id } )}}>
 					{{ conseil.name }}
@@ -24,6 +24,10 @@
 			</div>
 
 		{% endfor %}
+
+		<div class="d-flex justify-content-center mb-2"> 
+        {{knp_pagination_render(pagination)}}
+    	</div>
 	</div>
     {% include "footer.html.twig" %}
 {% endblock %}

@@ -40,12 +40,12 @@ class ConseilRepository extends ServiceEntityRepository
     }
 
     public function paginationQuery()
-   {
+    {
        return $this->createQueryBuilder('c')
            ->orderBy('c.id', 'ASC')
            ->getQuery()
        ;
-   }
+    }
 
 //    /**
 //     * @return Conseil[] Returns an array of Conseil objects

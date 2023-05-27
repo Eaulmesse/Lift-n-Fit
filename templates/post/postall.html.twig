@@ -19,7 +19,7 @@
 		{% endif %}
 
 		<div class="container mt-5 d-flex align-items-center flex-column flex-wrap">
-		{% for post in posts %}
+		{% for post in pagination %}
 			<div class="lato p-3 w-100  border-bottom border-success border-1">
 				<a class="link-success fs-5 mb-3 d-block text-truncate" style="max-width: 100%" href={{ path('app_post_id', {'id': post.id } )}}>
 					{{ post.name }}
@@ -27,10 +27,13 @@
 				<div class="d-block text-truncate mt-3 mb-2" style="max-width: 100%">
 					{{ post.content }}
 				</div>
-				{{ post.user.pseudonyme }}
+				{# {{ post.user.pseudonyme }} #}
 			</div>
-
 		{% endfor %}
+
+		<div class="d-flex justify-content-center mb-2"> 
+        {{knp_pagination_render(pagination)}}
+    	</div>
 	</div>
 
 		

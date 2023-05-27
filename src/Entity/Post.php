@@ -34,11 +34,6 @@ class Post
     #[ORM\JoinColumn(name: 'post_id_id')]
     private Collection $postReponses;
 
-    // #[ORM\ManyToOne(targetEntity: Post::class, inversedBy: 'idAthlete')]
-    // #[ORM\JoinColumn(onDelete: "SET NULL")]
-    // private $team;
-
-
 
     public function __construct()
     {

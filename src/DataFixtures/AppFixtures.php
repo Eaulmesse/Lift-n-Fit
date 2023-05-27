@@ -6,6 +6,7 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use App\Entity\Conseil;
 use App\Entity\User;
+use App\Entity\Post;
 
 class AppFixtures extends Fixture
 {
@@ -26,7 +27,14 @@ class AppFixtures extends Fixture
             $user->setPseudonyme('pseudo-'. $i);
             $user->setPassword('azertyuiop');
             $user->setCoach('1');
-            
+
+            $post = new Post();
+            $post->setName('post' . $i);
+            $post->setContent($i);
+            $post->setUser(null);
+            $post->setDate($date);
+
+            $manager->persist($post);
             $manager->persist($user);
             $manager->persist($conseil);
         }

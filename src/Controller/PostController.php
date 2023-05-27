@@ -12,26 +12,29 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\Security\Core\Authentication\AuthenticationManagerInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use App\Repository\PostRepository;
 use App\Repository\PostReponseRepository;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Vich\UploaderBundle\Form\Type\VichImageType;
+use Knp\Component\Pager\PaginatorInterface;
+
 
 class PostController extends AbstractController
 {
 
     #[Route('/post/all', name: 'app_post_all')]
-    public function postAll(PostRepository $postRepository): Response
+    public function postAll(PostRepository $postRepository, Request $request, PaginatorInterface $paginator): Response
     {
-        $post = $postRepository -> findall();
+        // $post = $postRepository -> findall();
+
+        $pagination = $paginator->paginate(
+            $postRepository->paginationQuery(),
+            $request->query->get('page', 1)
+        );
         
         return $this->render('post/postall.html.twig', [
             'controller_name' => 'PostController',
-            'posts' => $post,
+            'pagination' => $pagination
         ]);
     }
     
